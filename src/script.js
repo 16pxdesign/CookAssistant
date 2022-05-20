@@ -1,6 +1,8 @@
 const recipes = [];
 let recipeId = 0;
 let productId = 0;
+let productAmountId = 0;
+
 
 const form = document.getElementById("recipe-form");
 const body = document.getElementsByTagName("body")[0];
@@ -8,12 +10,19 @@ const taskList = document.getElementById("tasks-list");
 
 
 class Product {
-    constructor(id, name) {
+    constructor(id, name, amount) {
         this.id = id;
         this.name = name;
+        this.amount = amount;
     }
 }
 
+class ProductAmount {
+    constructor(id, amount) {
+        this.id = id;
+        this.amount = amount;
+    }
+}
 
 class Recipe {
     constructor(id, title, products) {
@@ -36,18 +45,22 @@ const removeRecipe = (recipeId) => {
 }
 
 const createProduct = (recId) => {
-    const value = document.getElementById(`product-input-${recId}`).value;
+    const name = document.getElementById(`product-name-input-${recId}`).value;
+    const amount = document.getElementById(`product-amount-input-${recId}`).value;
 
-    if (value) {
+    if (name && amount) {
         productId++;
-        const product = new Product(productId, value);
+        productAmountId++;
+        const productAmount = new ProductAmount(productAmountId, amount);
+
+        const product = new Product(productId, name, productAmount);
 
         recipes[recId].products.push(product);
     }
 }
 
 const removeProduct = (recId) => {
-    const value = document.getElementById(`product-input-${recId}`).value;
+    const value = document.getElementById(`product-name-input-${recId}`).value;
 
     value && (recipes[recId].products = recipes[recId].products.filter(product => product.name !== value));
 
@@ -55,12 +68,14 @@ const removeProduct = (recId) => {
 
 const refresh = () => {
     taskList.innerHTML = recipes.map(recipe => `<li id="recipe-${recipe.id}">Tytuł: ${recipe.title} 
-         Produkty: ${recipe.products.length > 0 ? recipe.products.map(product => ` ${product.name}`) : ""}
-         <button type="button" onclick="removeRecipe(${recipe.id}); refresh()">X</button>
-         <input id = "product-input-${recipe.id}" placeholder="Nazwa produktu:"/>
-         <button type="button" onclick="createProduct(${recipe.id}); refresh()">Dodaj produkt</button>
-         <button onclick="removeProduct(${recipe.id}); refresh()">Usuń Produkt</button>
-         </li>`).join("")
+        Produkty: ${recipe.products.length > 0 ?
+        recipe.products.map(product => ` ${product.name} ilość: ${product.amount.amount}`) : ""}
+        <button type="button" onclick="removeRecipe(${recipe.id}); refresh()">X</button>
+        <input id = "product-name-input-${recipe.id}" placeholder="Nazwa produktu:"/>
+        <input id = "product-amount-input-${recipe.id}" placeholder="Ilość produktu:"/>
+        <button type="button" onclick="createProduct(${recipe.id}); refresh()">Dodaj produkt</button>
+        <button onclick="removeProduct(${recipe.id}); refresh()">Usuń Produkt</button>
+        </li>`).join("")
 }
 
 
