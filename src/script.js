@@ -4,7 +4,7 @@ let productId = 0;
 
 
 const form = document.getElementById("recipe-form");
-const body = document.getElementsByTagName("body")[0];
+const body = document.body;
 const taskList = document.getElementById("tasks-list");
 
 
@@ -20,7 +20,7 @@ class Recipe {
     constructor(id, title, products) {
         this.id = id;
         this.title = title;
-        this.products = products;
+        this.products = products || [];
     }
 }
 
@@ -28,7 +28,7 @@ const createRecipe = (event) => {
     event.preventDefault();
 
     recipeId++;
-    recipes[recipeId] = new Recipe(recipeId, event.target[0].value, []);
+    recipes[recipeId] = new Recipe(recipeId, event.target[0].value);
     event.target[0].value = "";
 }
 
