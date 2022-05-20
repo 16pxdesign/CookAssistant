@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Task 3</title>
+</head>
+
+<body>
+    <h1>CookAsistant</h1>
+    <input placeholder="Recipe Name" />
+    <button onclick="recipes.addRecipe(this.previousElementSibling.value)">Add Recipe</button>
+    <ul id="recipes-list"></ul>
+    <script>
+        const recipes = {
+            recipes: [],
+            addRecipe(name) {
+                this.recipes.push({ id: Math.random(), name, products: [] });
+            },
+            removeRecipe(id) {
+                this.recipes = this.recipes.filter((r) => r.id != id);
+            },
+            addProduct(recipeId, name) {
+                const recipe = this.recipes.find((r) => r.id == recipeId);
+                recipe.products.push({ id: Math.random(), name, ammount: 1 });
+            },
+            removeProduct(id) {
+                this.recipes.forEach((r) => {
+                    r.products = r.products.filter((p) => p.id != id);
+                });
+            },
+            setProductAmmount(id, ammount) {
+                this.recipes.forEach((r) => {
+                    const product = r.products.find(p => p.id == id)
+                    if (product) product.ammount = ammount
+                });
+            }
+        };
+
+        const recipesList = document.getElementById("recipes-list")
+
+        function render() {
+            recipesList.innerHTML = recipes.recipes.map(recipe => `
+                <li>
+                    <h2>${recipe.name}</h2>
+                    <button onclick="recipes.removeRecipe(${recipe.id})">Remove Recipe</button>
+                    <input placeholder="Product Name" />
+                    <button onclick="recipes.addProduct(${recipe.id}, this.previousElementSibling.value)">Add Product</button>
+                    <ul>
+                        ${recipe.products.map(product => `
+                            <li>
+                                <h3>${product.name}</h3>
+                                <button onclick="recipes.removeProduct(${product.id})">Remove Product</button>
+                                <span>Ammount: </span>
+                                <input type="number" value="${product.ammount}" onchange="recipes.setProductAmmount(${product.id}, this.value)" />
+                            </li>`).join("")}
+                    </ul>
+                </li>`).join("")
+
+            const buttons = document.getElementsByTagName("button");
+            [...buttons].forEach(b => { b.addEventListener("click", render) });
+        }
+
+        render()
+    </script>
+</body>
+
+</html>
