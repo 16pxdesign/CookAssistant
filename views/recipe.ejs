@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Recipe</title>
+</head>
+
+<body>
+    <a href="/">Home</a>
+    <h1><%= recipe.name %></h1>
+    <form method="post" action="/delete-recipe/<%= recipe.id %>">
+        <button>Remove Recipe</button>
+    </form>
+    <ul>
+        <% products.forEach(product => { %>
+            <li>
+                <h3><%= product.name %></h3>
+                <span>x<%= product.ammount %></span>
+                <form method="post" action="/delete-product/<%= product.id %>">
+                    <button>Remove Product</button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+    <form method="post" action="/create-product">
+        <h2>Add Product</h2>
+        <input name="recipeId" type="hidden" value="<%= recipe.id %>" />
+        <label>Name</label>
+        <input name="name" />
+        <br />
+        <label >Ammount</label>
+        <input name="ammount" type="number" />
+        <br />
+        <button>Submit</button>
+    </form>
+</body>
+
+</html>
