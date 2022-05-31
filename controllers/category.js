@@ -1,9 +1,14 @@
 import db from "../database/index.js";
 
 export async function renderCategories(_, res) {
-  const [categories] = await db.query("SELECT * FROM categories");
+  const [categoriesWithParents] = await db.query(
+    `SELECT * FROM categories
+    JOIN categories_parents cp on categories.id = cp.category_id`
+  );
 
-  res.render("index", { categories });
+  const [categories] = await db.query(`SELECT * FROM categories`);
+
+  res.render("index", { categoriesWithParents, categories });
 }
 
 export async function renderCategory(req, res) {
@@ -12,22 +17,42 @@ export async function renderCategory(req, res) {
   let [category] = await db.query("SELECT * FROM categories WHERE id=?", [id]);
   category = category[0];
 
-  const [recipes] = await db.query("SELECT * FROM recipes WHERE categoryId=?", [
-    id,
-  ]);
+  const [subcategories] = await db.query(
+    `SELECT * FROM categories
+    JOIN cook_assistant.categories_parents cp on categories.id = cp.category_id
+    WHERE cp.parent_id=?`,
+    [id]
+  );
 
-  res.render("category", { category, recipes });
+  const [recipes] = await db.query(
+    `SELECT * FROM recipes
+    JOIN categories_recipes cr on recipes.id = cr.recipe_id
+    WHERE cr.category_id=?`,
+    [id]
+  );
+
+  res.render("category", { category, subcategories, recipes });
 }
 
 export async function createCategory(req, res) {
-  const name = req.body.name;
+  let { parentsIds } = req.body;
+  const { name } = req.body;
 
-  const [{ insertId }] = await db.query(
+  if (!Array.isArray(parentsIds)) parentsIds = [parentsIds];
+
+  const [{ insertId: categoryId }] = await db.query(
     "INSERT INTO categories (name) VALUES (?)",
     [name]
   );
 
-  res.redirect("/category/" + insertId);
+  for (const parentId of parentsIds) {
+    await db.query(
+      "INSERT INTO categories_parents (category_id, parent_id) VALUES (?,?)",
+      [categoryId, parentId]
+    );
+  }
+
+  res.redirect("/");
 }
 
 export async function deleteCategory(req, res) {

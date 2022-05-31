@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Cook Assistant - Recipe</title>
+    <title>Cook Assistant - <%= recipe.name %></title>
 </head>
 
 <body>
     <h1><%= recipe.name %></h1>
+
     <form method="post" action="/delete-recipe/<%= recipe.id %>">
-        <input name="categoryId" type="hidden" value="<%= recipe.categoryId %>" />
         <button>Delete Recipe</button>
     </form>
+
     <h2>Products</h2>
     <ul>
         <% products.forEach(product => { %>
             <li>
                 <h3><%= product.name %></h3>
-                <span>x<%= product.ammount %></span>
+                <span>x<%= product.amount %></span>
                 <form method="post" action="/delete-product/<%= product.id %>">
-                    <input name="recipeId" type="hidden" value="<%= recipe.id %>" />
+                    <input name="recipeId" type="hidden" value=<%= recipe.id %> />
                     <button>Delete Product</button>
                 </form>
             </li>
         <% }); %>
     </ul>
+
     <form method="post" action="/create-product">
         <h2>Add Product</h2>
-        <input name="recipeId" type="hidden" value="<%= recipe.id %>" />
+
+        <input name="recipeId" type="hidden" value=<%= recipe.id %> />
+
         <label>Name</label>
-        <input name="name" />
+        <input name="name" required />
         <br />
+
         <label >Ammount</label>
-        <input name="ammount" type="number" />
+        <input name="ammount" type="number" required />
         <br />
+
         <button>Submit</button>
     </form>
 </body>

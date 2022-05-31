@@ -4,7 +4,7 @@ export async function createProduct(req, res) {
   const { recipeId, name, ammount } = req.body;
 
   await db.query(
-    "INSERT INTO products (recipeId, name, ammount) VALUES (?,?,?)",
+    "INSERT INTO products (recipe_id, name, amount) VALUES (?,?,?)",
     [recipeId, name, ammount]
   );
 

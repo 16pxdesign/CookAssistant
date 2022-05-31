@@ -15,6 +15,7 @@ import { createProduct, deleteProduct } from "../controllers/product.js";
 const router = Router();
 
 router.get("/", renderCategories);
+
 router.get("/category/:id", renderCategory);
 router.post("/create-category", createCategory);
 router.post("/delete-category/:id", deleteCategory);

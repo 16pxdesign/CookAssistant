@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Cook Assistant - Category</title>
+    <title>Cook Assistant - <%= category.name %></title>
 </head>
 
 <body>
     <h1><%= category.name %></h1>
+
     <form method="post" action="/delete-category/<%= category.id %>">
         <button>Delete Category</button>
     </form>
-    <h2>Recipes</h2>
-    <% recipes.forEach((recipe) => { %>
-        <a href="/recipe/<%= recipe.id %>">
-            <%= recipe.name %>
-        </a>
-        <br />
-    <% }); %>
-    <form method="post" action="/create-recipe">
-        <h2>Create Recipe</h2>
-        <input name="categoryId" type="hidden" value="<%= category.id %>" />
-        <label>Name</label>
-        <input name="name" />
-        <br />
-        <button>Submit</button>
-    </form>
+
+    <% if (recipes.length > 0) { %>
+        <h2>Recipes</h2>
+        <ul>
+            <% recipes.forEach((recipe) => { %>
+                <li>
+                    <a href="/recipe/<%= recipe.id %>">
+                        <%= recipe.name %>
+                    </a>
+                </li>
+            <% }); %>
+        </ul>
+    <% }; %>
+
+    <% if (subcategories.length > 0) { %>
+        <h2>Subcategories</h2>
+        <ul>
+            <% subcategories.forEach((subcategory) => { %>
+                <li>
+                    <a href="/category/<%= subcategory.id %>">
+                        <%= subcategory.name %>
+                    </a>
+                </li>
+            <% }); %>
+        </ul>
+    <% }; %>
 </body>
 
 </html>
