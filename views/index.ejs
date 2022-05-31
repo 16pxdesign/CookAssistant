@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Recipes</title>
+    <title>Cook Assistant - Categories</title>
 </head>
 
 <body>
-    <h1>Recipes</h1>
-    <% recipes.forEach((recipe) => { %>
-        <a href="/recipe/<%= recipe.id %>">
-            <%= recipe.name %>
+    <h1>Cook Assistant</h1>
+    <h2>Categories</h2>
+    <% categories.forEach((category) => { %>
+        <a href="/category/<%= category.id %>">
+            <%= category.name %>
         </a>
         <br />
     <% }); %>
-    <form method="post" action="/create-recipe">
-        <h2>Add Recipe</h2>
+    <form method="post" action="/create-category">
+        <h2>Create Category</h2>
         <label>Name</label>
         <input name="name" />
         <br />
