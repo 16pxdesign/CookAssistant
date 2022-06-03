@@ -1,23 +1,73 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Recipes</title>
+    <title>Cook Assistant - Home</title>
 </head>
 
-<body>
-    <h1>Recipes</h1>
-    <% recipes.forEach((recipe) => { %>
-        <a href="/recipe/<%= recipe.id %>">
-            <%= recipe.name %>
+<% function renderCategory(category) { %>
+    <li>
+        <a href=<%= "/category/" + category.id %>>
+            <%= category.name %>
         </a>
-        <br />
-    <% }); %>
-    <form method="post" action="/create-recipe">
-        <h2>Add Recipe</h2>
+    </li>
+
+    <% const children = categoriesWithParents.filter(child => child.parent_id === category.id); %>
+    <% if (children.length > 0) { %>
+        <ul>
+            <% children.forEach(child => renderCategory(child)); %>
+        </ul>
+    <% }; %>
+<% }; %>
+
+<body>
+    <h1>Cook Assistant</h1>
+
+    <h2>Categories</h2>
+    <ul>
+        <% categoriesWithParents.forEach((category) => { %>
+            <% if (!category.parent_id) renderCategory(category); %>
+        <% }); %>
+    </ul>
+
+    <form method="post" action="/create-category">
+        <h2>Create Category</h2>
+
         <label>Name</label>
-        <input name="name" />
+        <input name="name" required />
         <br />
-        <button>Submit</button>
+
+        <label>Parents</label>
+        <select name="parentsIds" multiple required>
+            <option value="0">No Parent</option>
+            <% categories.forEach(category => { %>
+                <option value=<%= category.id %>>
+                    <%= category.name %>
+                </option>
+            <% }); %>
+        </select>
+        <br />
+
+        <button>Create Category</button>
+    </form>
+
+    <form method="post" action="/create-recipe">
+        <h2>Create Recipe</h2>
+
+        <label>Name</label>
+        <input name="name" required />
+        <br />
+
+        <label>Categories</label>
+        <select name="categoriesIds" multiple required>
+            <% categories.forEach(category => { %>
+                <option value=<%= category.id %>>
+                    <%= category.name %>
+                </option>
+            <% }); %>
+        </select>
+        <br />
+
+        <button>Create Recipe</button>
     </form>
 </body>
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Cook Assistant - <%= category.name %></title>
+</head>
+
+<body>
+    <h1><%= category.name %></h1>
+
+    <form method="post" action="/delete-category/<%= category.id %>">
+        <button>Delete Category</button>
+    </form>
+
+    <% if (recipes.length > 0) { %>
+        <h2>Recipes</h2>
+        <ul>
+            <% recipes.forEach((recipe) => { %>
+                <li>
+                    <a href="/recipe/<%= recipe.id %>">
+                        <%= recipe.name %>
+                    </a>
+                </li>
+            <% }); %>
+        </ul>
+    <% }; %>
+
+    <% if (subcategories.length > 0) { %>
+        <h2>Subcategories</h2>
+        <ul>
+            <% subcategories.forEach((subcategory) => { %>
+                <li>
+                    <a href="/category/<%= subcategory.id %>">
+                        <%= subcategory.name %>
+                    </a>
+                </li>
+            <% }); %>
+        </ul>
+    <% }; %>
+</body>
+
+</html>
