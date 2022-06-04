@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  app:
+    image: node:14-alpine
+    command: sh -c "npm install --production && npm start"
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=secret
+      - MYSQL_DB=cook_assistant
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - cook-assistant-mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=cook_assistant
+
+volumes:
+  cook-assistant-mysql-data:
