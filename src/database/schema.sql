@@ -1,5 +1,3 @@
-DROP DATABASE IF EXISTS cook_assistant;
-CREATE DATABASE cook_assistant;
 USE cook_assistant;
 
 CREATE TABLE categories (
