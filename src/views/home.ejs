@@ -8,9 +8,22 @@
 
 <h1>Cooking Assistant</h1>
 
-<button onclick="window.location.href = '/form'">Przyjdź do formularza</button>
+<button onclick="window.location.href = '/select-action'">Przyjdź do formularza</button>
 
-<ul></ul>
-<script type="application/javascript" src="../app.js"></script>
+<ul id="tasks-list">
+    <% recipes.forEach((recipe) => { %>
+        <a href="/recipe/<%= recipe.id %>">
+            <%= recipe.name %>
+        </a>
+        <form method="post" action="/recipe/delete/<%= recipe.id %>?_method=DELETE">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Usuń"/>
+        </form>
+
+        <br/>
+        <br/>
+    <% }) %>
+</ul>
+
 </body>
 </html>
