@@ -1,7 +1,7 @@
 import express from "express";
 import homeRouter from "./routes/home.js";
 import mysql from "mysql2/promise";
-import {createProductTable, createRecipeTable} from "./database/tables.js";
+import {createProductRecipeTable, createProductTable, createRecipeTable} from "./database/tables.js";
 import recipeRouter from "./routes/recipeController.js";
 import productRouter from "./routes/productController.js";
 
@@ -39,6 +39,8 @@ app.listen(9000, async () => {
 
         createRecipeTable(db);
         createProductTable(db);
+        createProductRecipeTable(db);
+
         console.info(`Application listening on 9000`);
     } catch (err) {
         console.error(err.message);
