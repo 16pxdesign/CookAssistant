@@ -12,6 +12,15 @@
     <label for="recipe-title-input">Tytuł przepisu</label>
     <input id="recipe-title-input" name="title" placeholder="Podaj tytuł: " required/>
 
+    <label for="products-list"> Wybierz produkty: </label>
+    <select name="productsList" id="products-list" multiple required>
+        <% products.forEach(({id, name}) => { %>
+            <option value="<%= id %>"> <%= name %></option>
+        <% }) %>
+    </select>
+
+    <button onclick="window.location.href = '/product'"> Dodaj produkt</button>
+
     <input type="submit" value="Potwierdź"/>
 </form>
 

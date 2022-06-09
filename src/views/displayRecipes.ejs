@@ -8,8 +8,13 @@
 
 <h1>Cooking Assistant</h1>
 
-<% recipe.forEach((recipe) => { %>
-    Tytuł: <%= recipe.name %>
+<h4>Tytuł: <%= name %></h4>
+<% products.forEach(product => { %>
+<h6>
+    Produkt: <%= product.name %>
+    <br/>
+    Ilość: <%= product.amount %>
+</h6>
 <% }) %>
 </body>
 </html>

@@ -7,27 +7,38 @@ const recipeRouter = express.Router();
 
 recipeRouter.use(methodOverride('_method'));
 
-recipeRouter.get("/", (req, res) => {
-    res.render('addRecipeForm');
+recipeRouter.get("/", async (_, res) => {
+    try {
+        const [products] = await db.query("SELECT * FROM products");
+        res.render('addRecipeForm', {products});
+    } catch (err) {
+        console.error(err.sqlMessage);
+        res.render("errorPage");
+    }
 });
 
 recipeRouter.get("/:id", async (req, res) => {
     try {
-    const result = await db.query("SELECT * FROM recipes WHERE id=?", [req.params.id]);
+        const [products] = await db.query(`SELECT name, amount FROM products JOIN products_recipes pr ON
+         products.id = pr.product_id WHERE pr.recipe_id = ?`, [req.params.id]);
 
-    const recipe = result[0];
+        const [[{name}]] = await db.query(`SELECT name FROM recipes WHERE recipes.id = ?`, [req.params.id]);
 
-    res.render('displayRecipes', {recipe});
-    }catch (err) {
+        res.render('displayRecipes', {name, products});
+    } catch (err) {
         console.error(err.sqlMessage);
         res.redirect("/error");
     }
 });
 
 
-recipeRouter.post('/create', (req, res) => {
+recipeRouter.post('/create', async (req, res) => {
     try {
-        db.query("INSERT INTO recipes (name) VALUES (?)", [req.body.title]);
+        const [{insertId}] = await db.query("INSERT INTO recipes (name) VALUES (?)", [req.body.title]);
+        for (let productId of req.body.productsList) {
+            await db.query("INSERT INTO products_recipes (recipe_id, product_id) VALUES (?, ?)", [insertId, productId]);
+        }
+
         res.redirect('/');
     } catch (err) {
         console.error(err.sqlMessage);
