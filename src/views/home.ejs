@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Cooking Assistant</title>
+</head>
+<body>
+
+<h1>Cooking Assistant</h1>
+
+<button onclick="window.location.href = '/recipe'">Dodaj przepis</button>
+
+<ul id="tasks-list">
+    <% recipes.forEach((recipe) => { %>
+        <a href="/recipe/<%= recipe.id %>">
+            <%= recipe.title %>
+        </a>
+        <button onclick="deleteRecipe(<%= recipe.id %>)">Usuń</button>
+        <br/>
+        <br/>
+    <% }) %>
+</ul>
+
+<script type="text/javascript">
+    const deleteRecipe = async (id) => {
+        const xmlReq = new XMLHttpRequest();
+        await xmlReq.open("DELETE", `/recipe/${id}`, true);
+        await xmlReq.send( null );
+        window.location.reload();
+    }
+</script>
+</body>
+</html>
