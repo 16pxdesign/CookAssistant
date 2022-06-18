@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Cooking Assistant</title>
+</head>
+<body>
+
+<h1>Cooking Assistant</h1>
+
+<h4>Tytuł: <%= title %></h4>
+
+<button type="button" onclick="createProduct(<%= id %>)"> Dodaj produkt</button>
+
+<% products.forEach(product => { %>
+    <h6>
+        Produkt: <%= product.name %>
+        <br/>
+        Ilość: <%= product.amount %>
+    </h6>
+
+    <button onclick="removeProduct(<%= product.id %>)"> Usuń Produkt</button>
+
+<% }) %>
+
+<br/>
+<br/>
+<br/>
+<button type="button" onclick="removeRecipe(<%= id %>)">Usuń Przepis</button>
+<button type="button" onclick="window.location.href = '/'">Powrót</button>
+
+<script type="text/javascript">
+    const xmlReq = new XMLHttpRequest();
+
+    const removeProduct = async (id) => {
+        await xmlReq.open("DELETE", `/product/${id}`, true);
+        await xmlReq.send(null);
+        window.location.reload();
+    };
+
+    const createProduct = (recipeId) => {
+        window.location.href = `/product?recipeId=${recipeId}`;
+    };
+
+    const removeRecipe = async (id) => {
+        await xmlReq.open("DELETE", `/recipe/${id}`, true);
+        await xmlReq.send(null);
+        window.location.href = '/';
+    };
+</script>
+</body>
+</html>

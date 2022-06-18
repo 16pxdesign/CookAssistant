@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Cooking Assistant - Add Form</title>
+</head>
+<body>
+
+<h1>Cooking Assistant</h1>
+
+<form action="/product?recipeId=<%= recipeId %>" method="post">
+    <label for="product-name-1"> Nazwa Produktu</label>
+    <input id="product-name-1" name="name" placeholder="Nazwa produktu: " required/>
+
+    <label for="product-amount-1"> Ilość Produktu</label>
+    <input id="product-amount-1" name="amount" type="number" placeholder="Ilość produktu: " required/>
+
+    <input type="submit" value="Potwierdź"/>
+</form>
+
+<button type="button" onclick="window.location.href = `/recipe/<%= recipeId %>`">Powrót</button>
+
+</body>
+</html>
