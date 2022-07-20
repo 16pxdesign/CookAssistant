@@ -1,4 +1,4 @@
-module com.example.cookapp {
+module com.example.usbkiller {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -11,6 +11,6 @@ module com.example.cookapp {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
 
-    opens com.example.cookapp to javafx.fxml;
-    exports com.example.cookapp;
+    opens com.example.usbkiller to javafx.fxml;
+    exports com.example.usbkiller;
 }
