@@ -1,0 +1,37 @@
+#removebutton{
+
+    -fx-background-color:
+        linear-gradient(#f2f2f2, #B8860B)
+        linear-gradient(#B8860B 0%, #B8860B 20%, #d6d6d6 100%),
+        linear-gradient(#006400 0%, #f6f6f6 50%, #B8860B);
+    -fx-background-radius: 8,7,6;
+    -fx-background-insets: 0,1,2;
+    -fx-text-fill:black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+#removebutton:hover{
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 6, 0.0 , 3 , 3.5);
+}
+#submitbutton{
+    -fx-background-color:
+            linear-gradient(#f2f2f2, #B8860B)
+            linear-gradient(#fcfcfc 0%, #B8860B 20%, #556B2F 100%),
+            linear-gradient(#006400 0%, #f6f6f6 50%, #B8860B);
+    -fx-background-radius: 8,7,6;
+    -fx-background-insets: 0,1,2;
+    -fx-text-fill:black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+#submitbutton:hover{
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 6, 0.0 , 3 , 3.5);
+}
+
+
+#panel{
+    -fx-background-color: #008B81;
+}
+
+#box{
+    -fx-text-fill: gray;
+}

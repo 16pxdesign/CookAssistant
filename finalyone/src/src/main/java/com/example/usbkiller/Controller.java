@@ -25,7 +25,7 @@ public class Controller implements Initializable {
     private TableColumn<Customer, Integer> gramatureColumn;
 
     @FXML
-    private TableColumn<Customer, Integer> numberColumn;
+    private TableColumn<Customer, Integer> recipeColumn;
 
     //Text input
     @FXML
@@ -35,22 +35,22 @@ public class Controller implements Initializable {
     private TextField gramatureInput;
 
     @FXML
-    private TextField numberInput;
+    private TextField recipeInput;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("name"));
         gramatureColumn.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("gramature"));
-        numberColumn.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("number"));
+        recipeColumn.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("recipe"));
     }
 
     //Submit button
     @FXML
     void submit(ActionEvent event) {
-        Customer customer = new Customer(nameInput.getText(),
-                Integer.parseInt(gramatureInput.getText()),
-                Integer.parseInt(numberInput.getText()));
+        Customer customer = new Customer(nameInput.getText(),recipeInput.getText(),
+                Integer.parseInt(gramatureInput.getText())
+                );
         ObservableList<Customer> customers = tableView.getItems();
         customers.add(customer);
         tableView.setItems(customers);

@@ -6,12 +6,12 @@ public class Customer {
 
     private String name;
     private int gramature;
-    private int number;
+    private String recipe;
 
-    public Customer(String name, int gramature, int number) {
+    public Customer(String name,  String recipe, int gramature) {
         this.name = name;
         this.gramature = gramature;
-        this.number = number;
+        this.recipe = recipe;
     }
 
     public String getName() {
@@ -30,11 +30,11 @@ public class Customer {
         this.gramature = gramature;
     }
 
-    public int getNumber() {
-        return number;
+    public String getRecipe() {
+        return recipe;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setRecipe(int number) {
+        this.recipe = recipe;
     }
 }
