@@ -1,9 +1,9 @@
 #removebutton{
 
     -fx-background-color:
-        linear-gradient(#f2f2f2, #B8860B)
-        linear-gradient(#B8860B 0%, #B8860B 20%, #d6d6d6 100%),
-        linear-gradient(#006400 0%, #f6f6f6 50%, #B8860B);
+            linear-gradient(green, blue)
+            linear-gradient(#fcfcfc 0%, lightgreen 20%, darkcyan 100%),
+            linear-gradient(#006400 0%, #f6f6f6 50%, lightblue);
     -fx-background-radius: 8,7,6;
     -fx-background-insets: 0,1,2;
     -fx-text-fill:black;
@@ -14,9 +14,9 @@
 }
 #submitbutton{
     -fx-background-color:
-            linear-gradient(#f2f2f2, #B8860B)
-            linear-gradient(#fcfcfc 0%, #B8860B 20%, #556B2F 100%),
-            linear-gradient(#006400 0%, #f6f6f6 50%, #B8860B);
+            linear-gradient(green, blue)
+            linear-gradient(#fcfcfc 0%, lightgreen 20%, darkcyan 100%),
+            linear-gradient(#006400 0%, #f6f6f6 50%, lightblue);
     -fx-background-radius: 8,7,6;
     -fx-background-insets: 0,1,2;
     -fx-text-fill:black;
@@ -29,9 +29,53 @@
 
 
 #panel{
-    -fx-background-color: #008B81;
+    -fx-background-color: linear-gradient(to bottom right, green, blue, orange, red, yellowgreen, blueviolet);
 }
 
 #box{
     -fx-text-fill: gray;
+}
+#gramatureColumn{
+    -fx-background-color: yellowgreen;
+}
+#recipeColumn{
+    -fx-background-color: yellowgreen;
+}
+
+#nameColumn{
+    -fx-background-color: yellowgreen;
+}
+
+#menuButton{
+    -fx-background-color:
+            linear-gradient(green, blue)
+            linear-gradient(#fcfcfc 0%, lightgreen 20%, darkcyan 100%),
+            linear-gradient(#006400 0%, #f6f6f6 50%, lightblue);
+    -fx-background-radius: 8,7,6;
+    -fx-background-insets: 0,1,2;
+    -fx-text-fill:black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+#close{
+    -fx-background-color: yellowgreen;
+}
+
+#newRecipe{
+    -fx-background-color: yellowgreen;
+}
+
+#search{
+    -fx-background-color:
+            linear-gradient(green, blue)
+            linear-gradient(#fcfcfc 0%, lightgreen 20%, darkcyan 100%),
+            linear-gradient(#006400 0%, #f6f6f6 50%, lightblue);
+    -fx-background-radius: 8,7,6;
+    -fx-background-insets: 0,1,2;
+    -fx-text-fill:black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+#seave{
+    -fx-background-color: yellowgreen ;
 }

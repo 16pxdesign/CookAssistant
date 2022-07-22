@@ -1,9 +1,15 @@
 package com.example.usbkiller;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.MenuBar;
@@ -12,12 +18,22 @@ public class Main extends Application {
 
 
 
+
+    @FXML
+    private BorderPane bp;
+
+
     @Override
     public void start(Stage primaryStage) throws Exception{
     try {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        MenuBar Bar  = new MenuBar();
-        VBox vBox = new VBox(Bar);
+        //MenuBar Bar  = new MenuBar();
+        //Menu fileMenu = new Menu("addRecipe");
+        //MenuItem newitem= new MenuItem("new");
+        //MenuItem exit = new MenuItem("exit");
+       // fileMenu.getItems().addAll(newitem, exit);
+        //Bar.getMenus().addAll(fileMenu);
+//        bp.setTop(Bar);
         Scene scene = new Scene(root);
         String css = this.getClass().getResource("application.css").toExternalForm();
         scene.getStylesheets().add(css);
